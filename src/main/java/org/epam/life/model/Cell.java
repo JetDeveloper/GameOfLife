@@ -12,8 +12,8 @@ package org.epam.life.model;
  */
 public class Cell implements Cloneable{
     private int x;
-    private int y;
-
+    private int y;   
+    
     public int getX() {
         return x;
     }
