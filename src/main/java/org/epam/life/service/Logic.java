@@ -5,6 +5,7 @@
  */
 package org.epam.life.service;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Logic implements LogicService {
     private int maxRows;
     private int generation;
 
-    private List<LogicCell> currentStep;
+    private List<LogicCell> currentStep = new ArrayList<>();
     private HashMap<LogicCell, LogicCell> nextStep = new HashMap<>();
 
     public Logic(int maxCols, int maxRows) {

@@ -9,6 +9,7 @@ package org.epam.life.rest;
 import org.epam.life.model.Template;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,27 +21,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public interface LifeGameRest {
     
-    @RequestMapping(value="/control/newgame", method = RequestMethod.POST)
+    @RequestMapping(value="/newgame", method = RequestMethod.POST)
     @ResponseBody
     Integer newGame();
     
-    @RequestMapping(value="/control/nextstep/{gameId}", method = RequestMethod.GET)
+    @RequestMapping(value="/nextstep/{gameId}", method = RequestMethod.GET)
     @ResponseBody
     Template nextStep(@PathVariable Integer gameId);
     
-    @RequestMapping(value="/control/terminategame/{gameId}", method = RequestMethod.GET)
+    @RequestMapping(value="/terminategame/{gameId}", method = RequestMethod.GET)
     @ResponseBody
     void terminateGame(@PathVariable Integer gameId);
     
-    @RequestMapping(value="/control/getgamestate/{gameId}", method = RequestMethod.GET)
+    @RequestMapping(value="/getgamestate/{gameId}", method = RequestMethod.GET)
     @ResponseBody
     Template getGameState(@PathVariable Integer gameId);
     
-    @RequestMapping(value="/control/loadmodel/{template}/gameid/{gameId}", method = RequestMethod.GET)
+    @RequestMapping(value="/loadmodel/{gameId}", method = RequestMethod.POST)
     @ResponseBody
-    void loadModel(@PathVariable Template template,@PathVariable Integer gameId);
+    void loadModel(@RequestBody Template template, @PathVariable Integer gameId);
     
-    @RequestMapping(value="/control/savemodel/{gameId}", method = RequestMethod.PUT)
+    @RequestMapping(value="/savemodel/{gameId}", method = RequestMethod.PUT)
     @ResponseBody
     void saveModel(@PathVariable Integer gameId);
     

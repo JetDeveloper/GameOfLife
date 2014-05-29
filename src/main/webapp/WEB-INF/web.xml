@@ -28,9 +28,6 @@ and open the template in the editor.
 
     <servlet-mapping>
         <servlet-name>GameOfLife</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/control/*</url-pattern>
     </servlet-mapping>
-
-   
-
 </web-app>

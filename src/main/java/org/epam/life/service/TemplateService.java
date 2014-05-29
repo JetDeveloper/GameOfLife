@@ -5,13 +5,15 @@
  */
 package org.epam.life.service;
 
+import org.epam.life.model.Template;
+
 /**
  *
  * @author pp
  */
 public interface TemplateService {
 
-    void loadModel();
+    void loadModel(Template template, Integer gameId);
 
     void saveModel(Integer gameId);
 }

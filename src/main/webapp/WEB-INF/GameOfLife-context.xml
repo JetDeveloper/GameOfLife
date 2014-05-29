@@ -21,6 +21,6 @@ and open the template in the editor.
 
     <context:component-scan base-package="org.epam.life.rest.impl" />
     <mvc:annotation-driven/>
-   
+    <bean id="gameManager" class="org.epam.life.service.impl.GameManager"/>
  
 </beans>

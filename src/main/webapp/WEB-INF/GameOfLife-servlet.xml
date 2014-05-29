@@ -15,7 +15,6 @@ and open the template in the editor.
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
    <context:component-scan base-package="org.epam.life.rest.impl" />
-
    
  
 </beans>
