@@ -2,16 +2,18 @@ var gameStance = {
 	cells: [{x:1, y:1}]
 }
 
+var hostName = "localhost:8080/";
+
 var isRunning = false;
 var intervalVariable = null;
+var gameId = 0;
 
 function initCanvas() {
 	var gameField = document.getElementById("gameField"),
         ctx     = gameField.getContext('2d');
     ctx.fillStyle = "#eee";
     ctx.fillRect(0, 0, gameField.width, gameField.height);  
-    gameField.onclick = canvasMouseClick;
-    //setInterval(function(){alert("Hello")},3000);
+    gameField.onclick = canvasMouseClickHandler;
 }
 
 function drawField(aliveCells) {
@@ -34,8 +36,10 @@ function drawCell(cell, isAlive) {
 			cellSpace + (cellSpace * cell.y) + (cellSize * cell.y), cellSize, cellSize);	
 }
 
+// HANDLERS
+
 function btnNextOnClickHandler() {
-	$.post("", JSON.stringify(gameStance), function(data){
+	$.get(hostName + "/nextstep/" + gameId, JSON.stringify(gameStance), function(data){
 		gameStance = JSON.parse(data);
 	});
 	drawField(gameStance.cells);
@@ -51,7 +55,7 @@ function btnRunOnClickHandler() {
 	if (isRunning) {
 		btn.value = "Run";
 		window.clearInterval(intervalVariable);
-		intervalVariable = null;
+		intervalVariable = null;	
 		isRunning = false;
 	} else {
 		btn.value = "Stop";
@@ -60,7 +64,14 @@ function btnRunOnClickHandler() {
 	}
 }
 
-function canvasMouseClick(e) {
+function btnNewOnClickHandler() {
+	$.post(hostName + "/newgame/", function (data){
+		gameId = JSON.parse(data);
+	});
+	drawField(gameStance.cells);
+}
+
+function canvasMouseClickHandler(e) {
 	var position = mousePosition(e);
 	if(searchCell(gameStance, position) == -1) {
 		gameStance.cells.push(position);
@@ -86,7 +97,6 @@ function mousePosition(e) {
 			+ document.documentElement.scrollTop;
 	}
     
-    // domObject = event.target || event.srcElement;
     var domObject = e.target;
 	while(domObject.nodeType != domObject.ELEMENT_NODE)
 	domObject = domObject.parentNode;
@@ -96,8 +106,6 @@ function mousePosition(e) {
         top += domObject.offsetTop;
         domObject = domObject.offsetParent;
     }
-
-
 
     domObject.pageTop = top;
     domObject.pageLeft = left;
